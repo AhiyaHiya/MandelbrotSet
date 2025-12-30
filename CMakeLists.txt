@@ -30,6 +30,9 @@ project(mandelbrot VERSION 0.1.0)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 20)
 
+# Folders for IDEs that support it
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
 include(CTest)
 enable_testing()
 
