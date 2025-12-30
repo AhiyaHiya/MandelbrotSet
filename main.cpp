@@ -1,9 +1,10 @@
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/imgproc.hpp>
+
 #include <complex>
 #include <cstdint>
 #include <filesystem>
 #include <iostream>
-#include <opencv2/imgcodecs.hpp>
-#include <opencv2/imgproc.hpp>
 #include <vector>
 
 /****************************************************************
