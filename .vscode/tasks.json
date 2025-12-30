@@ -1,0 +1,154 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "dependsOn": ["CMake Configure", "CMake Build only"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "CMake Configure",
+      "type": "shell",
+      "command": "cmake",
+      "args": [
+        "-B", "build",
+        "-S", ".",
+        "-G", "Ninja",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "always"
+      }
+    },
+    {
+      "label": "CMake Build only",
+      "type": "shell",
+      "command": "cmake",
+      "args": ["--build", "build"],
+      "group": "build",
+      "problemMatcher": [],
+      "presentation": {
+        "echo": true,
+        "reveal": "always"
+      }
+    },
+    {
+      "label": "CMake Configure ASAN",
+      "type": "shell",
+      "command": "cmake",
+      "args": [
+        "-S", ".",
+        "-B", "build-asan",
+        "-G", "Ninja",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+        "-DCMAKE_C_FLAGS=-fsanitize=address -fno-omit-frame-pointer -O1 -g",
+        "-DCMAKE_CXX_FLAGS=-fsanitize=address -fno-omit-frame-pointer -O1 -g",
+        "-DCMAKE_EXE_LINKER_FLAGS=-fsanitize=address"
+      ],
+      "problemMatcher": "$gcc",
+      "presentation": { "reveal": "always" }
+    },
+    {
+      "label": "CMake Build ASAN",
+      "type": "shell",
+      "command": "cmake",
+      "args": ["--build", "build-asan"],
+      "group": "build",
+      "presentation": { "reveal": "always" }
+    },
+    {
+      "label": "build: asan",
+      "dependsOn": ["CMake Configure ASAN", "CMake Build ASAN"],
+      "group": "build",
+      "presentation": { "reveal": "always" }
+    },
+    {
+      "label": "build: asan",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-lc",
+        "cmake -S . -B build-asan -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_C_FLAGS='-fsanitize=address -fno-omit-frame-pointer -O1 -g' -DCMAKE_CXX_FLAGS='-fsanitize=address -fno-omit-frame-pointer -O1 -g' -DCMAKE_EXE_LINKER_FLAGS='-fsanitize=address' && cmake --build build-asan"
+      ],
+      "group": "build",
+      "problemMatcher": "$gcc",
+      "presentation": {
+        "reveal": "always"
+      }
+    },
+    {
+      "label": "CMake Configure TSAN",
+      "type": "shell",
+      "command": "cmake",
+      "args": [
+        "-S", ".",
+        "-B", "build-tsan",
+        "-G", "Ninja",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+        "-DCMAKE_C_FLAGS=-fsanitize=thread -O1 -g",
+        "-DCMAKE_CXX_FLAGS=-fsanitize=thread -O1 -g",
+        "-DCMAKE_EXE_LINKER_FLAGS=-fsanitize=thread"
+      ],
+      "problemMatcher": "$gcc",
+      "presentation": { "reveal": "always" }
+    },
+    {
+      "label": "CMake Build TSAN",
+      "type": "shell",
+      "command": "cmake",
+      "args": ["--build", "build-tsan"],
+      "group": "build",
+      "presentation": { "reveal": "always" }
+    },
+    {
+      "label": "build: tsan",
+      "dependsOn": ["CMake Configure TSAN", "CMake Build TSAN"],
+      "group": "build",
+      "presentation": { "reveal": "always" }
+    },
+    {
+      "label": "CMake Configure UBSAN",
+      "type": "shell",
+      "command": "cmake",
+      "args": [
+        "-S", ".",
+        "-B", "build-ubsan",
+        "-G", "Ninja",
+        "-DCMAKE_BUILD_TYPE=Debug",
+        "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+        "-DCMAKE_C_FLAGS=-fsanitize=undefined -O1 -g",
+        "-DCMAKE_CXX_FLAGS=-fsanitize=undefined -O1 -g",
+        "-DCMAKE_EXE_LINKER_FLAGS=-fsanitize=undefined"
+      ],
+      "problemMatcher": "$gcc",
+      "presentation": { "reveal": "always" }
+    },
+    {
+      "label": "CMake Build UBSAN",
+      "type": "shell",
+      "command": "cmake",
+      "args": ["--build", "build-ubsan"],
+      "group": "build",
+      "presentation": { "reveal": "always" }
+    },
+    {
+      "label": "build: ubsan",
+      "dependsOn": ["CMake Configure UBSAN", "CMake Build UBSAN"],
+      "group": "build",
+      "presentation": { "reveal": "always" }
+    }
+  ]
+}

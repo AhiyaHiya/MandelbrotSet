@@ -1,0 +1,27 @@
+{
+  "configurations": [
+    {
+      "name": "Linux",
+      "compileCommands": "${workspaceFolder}/build/compile_commands.json",
+      "compilerPath": "/usr/local/gcc-15/bin/g++",
+      "cppStandard": "c++23",
+      "cStandard": "c17",
+      "intelliSenseMode": "linux-gcc-x64",
+      "compilerArgs": [
+        "-std=c++23"
+      ]
+    },
+    {
+      "name": "Windows",
+      "compileCommands": "${workspaceFolder}/build/compile_commands.json",
+      "compilerPath": "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.39.33519/bin/Hostx64/x64/cl.exe",
+      "cppStandard": "c++latest",
+      "cStandard": "c17",
+      "intelliSenseMode": "windows-msvc-x64",
+      "compilerArgs": [
+        "/std:c++latest"
+      ]
+    }
+  ],
+  "version": 4
+}

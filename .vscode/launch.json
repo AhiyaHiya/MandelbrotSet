@@ -1,0 +1,72 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug C++ (LLDB)",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/mandelbrot",
+      "windows": {
+        "program": "${workspaceFolder}/build/mandelbrot.exe"
+      },
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "stopOnEntry": false,
+      "sourceLanguages": [
+        "cpp"
+      ],
+      "preLaunchTask": "build"
+    },
+    {
+      "name": "Debug ASan (LLDB)",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/build-asan/mandelbrot",
+      "windows": {
+        "program": "${workspaceFolder}/build-asan/mandelbrot.exe"
+      },
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "build: asan",
+      "env": {
+        "ASAN_OPTIONS": "detect_leaks=1:abort_on_error=1"
+      }
+    },
+    {
+      "name": "Debug TSan (LLDB)",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/build-tsan/mandelbrot",
+      "windows": {
+        "program": "${workspaceFolder}/build-tsan/mandelbrot.exe"
+      },
+      "preLaunchTask": "build: tsan"
+    },
+    {
+      "name": "Debug UBSan (LLDB)",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/build-ubsan/mandelbrot",
+      "windows": {
+        "program": "${workspaceFolder}/build-ubsan/mandelbrot.exe"
+      },
+      "preLaunchTask": "build: ubsan"
+    },
+    {
+      "name": "Run Tests (LLDB)",
+      "type": "lldb",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/mandelbrot",
+      "windows": {
+        "program": "${workspaceFolder}/build/mandelbrot.exe"
+      },
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "stopOnEntry": false,
+      "sourceLanguages": [
+        "cpp"
+      ],
+      "preLaunchTask": "build"
+    }
+  ]
+}
